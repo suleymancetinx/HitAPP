@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS diksiyon_app;
+USE diksiyon_app;
+
+CREATE TABLE kullanicilar (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ad_soyad VARCHAR(100) NOT NULL,
+    eposta VARCHAR(100) NOT NULL UNIQUE,
+    sifre VARCHAR(255) NOT NULL,
+    kayit_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

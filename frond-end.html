@@ -1,0 +1,969 @@
+<!-- Tekerlemeler -->
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#94d3bd",
+                        "on-tertiary-fixed": "#2a1704",
+                        "tertiary-fixed-dim": "#e3c0a0",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-tint": "#296956",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-fixed-dim": "#c8c1f0",
+                        "secondary": "#5e5983",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9fa",
+                        "primary": "#296956",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed": "#aff0d8",
+                        "surface-dim": "#d9dadb",
+                        "primary-container": "#98d8c1",
+                        "tertiary": "#74593f",
+                        "surface-container": "#edeeef",
+                        "secondary-container": "#d6cfff",
+                        "on-background": "#191c1d",
+                        "secondary-fixed": "#e5deff",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#e8c5a5",
+                        "on-primary-container": "#1e604e",
+                        "on-primary-fixed": "#002118",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#1b163b",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c3",
+                        "on-primary-fixed-variant": "#07513f",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed-variant": "#474269",
+                        "on-surface-variant": "#404945",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#6b5137",
+                        "on-tertiary-fixed-variant": "#5a422a",
+                        "outline": "#707974",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#94d3bd",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-secondary-container": "#5b5780",
+                        "tertiary-fixed": "#ffdcbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-lg": "40px",
+                        "margin-mobile": "24px",
+                        "stack-sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9fa;
+            -webkit-font-smoothing: antialiased;
+        }
+        .peach-gradient-soft {
+            background: linear-gradient(135deg, #ffdcbe 0%, #ffffff 100%);
+        }
+        .bento-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)]">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-primary-fixed">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a young professional woman with a friendly smile, soft natural studio lighting, minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUhYBsOwJ14lmc5tyOkd403QCWLKDkllDJ0QeYnSqiHSoPWr1xVrc-VC84ei3Q28G1e1Hs6_AvDPpQEphgN_CTXHE-tQ5y1VwMWuH9uCHkp9OBmrKLHlglpmn4bVbzP__C8KYiCko4wzTDOyWeZpMSLf8FOF1WPnjpXtwMfpCCOrVdl-mANP-7Y5moLkReEdr6gji5ffld5w7egPUIYSV8qCN-JP4YWKLGKAGb9PE_8l5ojwCML3VsSojXFTpkusEL4T21RF2vFaK3"/>
+</div>
+<h1 class="text-xl font-bold text-teal-600 font-headline-md tracking-tight">Diction</h1>
+<button class="p-2 rounded-full hover:bg-teal-50/50 transition-colors">
+<span class="material-symbols-outlined text-slate-400" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-4xl mx-auto space-y-stack-lg">
+<!-- Hero Section -->
+<section class="text-center space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Tekerlemeler</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto">
+                Diksiyonunuzu geliştirmek ve dil kaslarınızı esnetmek için özenle seçilmiş alıştırmalar.
+            </p>
+</section>
+<!-- Category Selector -->
+<nav class="flex justify-center gap-4 py-2">
+<button class="px-6 py-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm shadow-sm">Kolay</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant font-label-sm border border-outline-variant hover:bg-tertiary-fixed/30 transition-all">Orta</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant font-label-sm border border-outline-variant hover:bg-tertiary-fixed/30 transition-all">Zor</button>
+</nav>
+<!-- Bento Grid Rhyme Content -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Easy Card 1 -->
+<div class="bento-card p-stack-md rounded-lg bg-tertiary-fixed/20 shadow-[0_20px_30px_rgba(255,220,190,0.2)] space-y-4 border border-tertiary-fixed/50">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 rounded-full bg-white/60 text-[11px] font-bold text-tertiary uppercase tracking-wider">Kolay</span>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="record_voice_over">record_voice_over</span>
+</div>
+<p class="font-headline-md text-on-surface leading-relaxed italic">
+                    "Şu yoğurdu sarımsaklasak da mı saklasak, sarımsaklamasak da mı saklasak?"
+                </p>
+<div class="flex justify-end">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-tertiary-container text-on-tertiary-container shadow-lg shadow-tertiary-container/30 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+</div>
+<!-- Easy Card 2 -->
+<div class="bento-card p-stack-md rounded-lg bg-white shadow-[0_20px_30px_rgba(0,0,0,0.04)] space-y-4 border border-surface-container">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 rounded-full bg-surface-container text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Kolay</span>
+<span class="material-symbols-outlined text-outline-variant" data-icon="record_voice_over">record_voice_over</span>
+</div>
+<p class="font-headline-md text-on-surface leading-relaxed">
+                    "Dal sarkar kartal kalkar, kartal kalkar dal sarkar."
+                </p>
+<div class="flex justify-end">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<!-- Image/Decorative Card -->
+<div class="md:col-span-2 relative h-48 rounded-lg overflow-hidden shadow-xl group">
+<img alt="Soothing Atmosphere" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Minimalist desktop with a ceramic cup of peach tea, soft morning sunlight, pastel peach and white color palette, serene vibes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeJ8mxi8euqm0rlZ8deMO_J29ekj4JO1eV7vKskcfCmPZNk8StHdBUXUboZCqnzmoC_y14nFi3fF-zY-alSlOpjoqZUREyLKhHY7joDuhP5pVWrG6apK4tBS4Uvftfzao3Zq0zMawWJl7SRiplJSraZPoHtFKuIxKClYAoPQjZ2FsBxXr2_MKWnK8aQ_oHM-PsnWv4snbosqKLh0lT-hBpcqFUFi5J2GHXCR-xL0zcvyQ1NQXkCIHM_9GzHqdnW8I7tMGWWvLr8knp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-tertiary-fixed/80 to-transparent flex items-end p-6">
+<p class="text-on-tertiary-fixed font-bold font-headline-md">Günlük Hedefine Ulaş</p>
+</div>
+</div>
+<!-- Medium Card -->
+<div class="bento-card p-stack-md rounded-lg bg-white shadow-[0_20px_30px_rgba(0,0,0,0.04)] space-y-4 border border-surface-container">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 rounded-full bg-surface-container text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Orta</span>
+<span class="material-symbols-outlined text-outline-variant" data-icon="record_voice_over">record_voice_over</span>
+</div>
+<p class="font-headline-md text-on-surface leading-relaxed">
+                    "Bir berber bir berbere gel birader beraber bir berber dükkanı açalım demiş."
+                </p>
+<div class="flex justify-end">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container text-on-surface-variant hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<!-- Hard Card (Featured Style) -->
+<div class="bento-card p-stack-md rounded-lg bg-tertiary-container shadow-[0_30px_50px_rgba(232,197,165,0.4)] space-y-4">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 rounded-full bg-white/40 text-[11px] font-extrabold text-on-tertiary-container uppercase tracking-wider">Zor</span>
+<span class="material-symbols-outlined text-white" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline-md text-on-tertiary-container leading-relaxed">
+                    "Şu köşe yaz köşesi, şu köşe kış köşesi, ortada su şişesi."
+                </p>
+<div class="flex items-center justify-between pt-4 border-t border-on-tertiary-container/10">
+<span class="text-label-sm text-on-tertiary-container/80">32 Kişi Pratik Yaptı</span>
+<button class="px-6 py-2 rounded-full bg-on-tertiary-container text-white font-label-sm active:scale-95 transition-transform">
+                        Pratiğe Başla
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white/90 backdrop-blur-lg shadow-[0_-10px_40px_rgba(152,216,193,0.12)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-all hover:text-teal-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-teal-50 text-teal-600 rounded-full px-5 py-2 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="record_voice_over">record_voice_over</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Exercises</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-all hover:text-teal-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="insights">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-all hover:text-teal-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Egzersiz Detayı -->
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diction - Diyafram Nefesi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#94d3bd",
+                        "on-tertiary-fixed": "#2a1704",
+                        "tertiary-fixed-dim": "#e3c0a0",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-tint": "#296956",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-fixed-dim": "#c8c1f0",
+                        "secondary": "#5e5983",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9fa",
+                        "primary": "#296956",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed": "#aff0d8",
+                        "surface-dim": "#d9dadb",
+                        "primary-container": "#98d8c1",
+                        "tertiary": "#74593f",
+                        "surface-container": "#edeeef",
+                        "secondary-container": "#d6cfff",
+                        "on-background": "#191c1d",
+                        "secondary-fixed": "#e5deff",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#e8c5a5",
+                        "on-primary-container": "#1e604e",
+                        "on-primary-fixed": "#002118",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#1b163b",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c3",
+                        "on-primary-fixed-variant": "#07513f",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed-variant": "#474269",
+                        "on-surface-variant": "#404945",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#6b5137",
+                        "on-tertiary-fixed-variant": "#5a422a",
+                        "outline": "#707974",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#94d3bd",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-secondary-container": "#5b5780",
+                        "tertiary-fixed": "#ffdcbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-lg": "40px",
+                        "margin-mobile": "24px",
+                        "stack-sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .breathing-circle {
+            animation: breathe 12s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            40% { transform: scale(1.6); opacity: 0.8; }
+            60% { transform: scale(1.6); opacity: 0.8; }
+        }
+        .pulse-soft {
+            animation: pulse-ring 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 0.1; transform: scale(0.95); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-teal-50/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-teal-600 dark:text-teal-400 font-['Plus_Jakarta_Sans'] tracking-tight">Diction</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">settings</span>
+<div class="w-8 h-8 rounded-full bg-primary-container/30 flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="minimalist user avatar illustration in soft teal and white colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ-BkfvP7F40ZUImpqJcEUsXHoMYiNDMNwQHHsvpLfCUW9-w7C6b__aiinG2C5FC_lLEEon3D7gWtZSmxPB6v8HVOkEYZUvIFHGCEjdwqbMsCbDnQHtPDhP-Qn_NNEFGX9TJyAA0U1jvNdMPMHTXRnNehw1fTlZM5Po2paKaLSWuSTlWjJebX19hq1Jl4BrAE_4oRqd78L7gS7L_IMuDBP062TmKMAbZN8tREfEufmwS78U6VdaSu5cLo9qncUqt7kthag5dM1JTYl"/>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile pt-24 pb-32">
+<!-- Exercise Header -->
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Diyafram Nefesi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mx-auto">Derinleşin, sakinleşin ve sesinizi serbest bırakın.</p>
+</div>
+<!-- Animation Canvas -->
+<div class="relative w-full max-w-md aspect-square flex items-center justify-center">
+<!-- Background Decorative Rings -->
+<div class="absolute w-72 h-72 rounded-full border-2 border-primary-container/20 pulse-soft"></div>
+<div class="absolute w-80 h-80 rounded-full border border-secondary-container/10"></div>
+<!-- The Breathing Core -->
+<div class="relative flex items-center justify-center">
+<!-- Large Animated Circle -->
+<div class="breathing-circle w-48 h-48 bg-primary-container rounded-full blur-3xl absolute"></div>
+<div class="breathing-circle w-40 h-40 bg-primary-fixed-dim rounded-full absolute shadow-[0_0_60px_rgba(148,211,189,0.4)]"></div>
+<!-- Inner Text Status -->
+<div class="z-10 text-center">
+<span class="block font-headline-md text-headline-md text-on-primary-container transition-all duration-700">Nefes Al</span>
+<span class="block font-label-sm text-label-sm text-on-primary-container/70 mt-1 uppercase tracking-widest">4 Saniye</span>
+</div>
+</div>
+</div>
+<!-- Instructional Indicators -->
+<div class="flex gap-4 mt-stack-lg">
+<div class="flex flex-col items-center gap-2 opacity-100">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Nefes Al</span>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-40">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Tut</span>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-40">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Nefes Ver</span>
+</div>
+</div>
+<!-- Controls Section -->
+<div class="w-full max-w-xs mt-stack-lg space-y-stack-md">
+<!-- Timer Card -->
+<div class="bg-surface-container-low rounded-lg p-6 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">KALAN SÜRE</span>
+<span class="font-headline-md text-headline-md text-primary tracking-widest">04:52</span>
+</div>
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[32px]">timer</span>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="flex items-center gap-4">
+<button class="flex-grow bg-primary text-on-primary font-headline-md py-4 rounded-full shadow-[0_12px_24px_-8px_rgba(41,105,86,0.3)] hover:scale-[1.02] active:scale-95 transition-all">
+                    Durdur
+                </button>
+<button class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl">refresh</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-[0_-10px_40px_rgba(152,216,193,0.12)] rounded-t-[32px] flex justify-around items-center px-4 pb-8 pt-4">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 rounded-full px-5 py-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">Exercises</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">Profile</span>
+</a>
+</nav>
+<!-- Success Message (Floating Toast Idea) -->
+<div class="fixed top-24 left-1/2 -translate-x-1/2 bg-on-tertiary-fixed text-tertiary-fixed px-6 py-3 rounded-full flex items-center gap-3 shadow-xl opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-label-sm">Egzersiz Başlatıldı</span>
+</div>
+</body></html>
+
+<!-- Ana Sayfa -->
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#94d3bd",
+                    "on-tertiary-fixed": "#2a1704",
+                    "tertiary-fixed-dim": "#e3c0a0",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-tint": "#296956",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary-fixed-dim": "#c8c1f0",
+                    "secondary": "#5e5983",
+                    "on-error-container": "#93000a",
+                    "background": "#f8f9fa",
+                    "primary": "#296956",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-variant": "#e1e3e4",
+                    "primary-fixed": "#aff0d8",
+                    "surface-dim": "#d9dadb",
+                    "primary-container": "#98d8c1",
+                    "tertiary": "#74593f",
+                    "surface-container": "#edeeef",
+                    "secondary-container": "#d6cfff",
+                    "on-background": "#191c1d",
+                    "secondary-fixed": "#e5deff",
+                    "surface": "#f8f9fa",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#e8c5a5",
+                    "on-primary-container": "#1e604e",
+                    "on-primary-fixed": "#002118",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#1b163b",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#bfc9c3",
+                    "on-primary-fixed-variant": "#07513f",
+                    "surface-bright": "#f8f9fa",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-fixed-variant": "#474269",
+                    "on-surface-variant": "#404945",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#6b5137",
+                    "on-tertiary-fixed-variant": "#5a422a",
+                    "outline": "#707974",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#94d3bd",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-secondary-container": "#5b5780",
+                    "tertiary-fixed": "#ffdcbe"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-md": "24px",
+                    "stack-lg": "40px",
+                    "margin-mobile": "24px",
+                    "stack-sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-glow-mint { box-shadow: 0 10px 30px -5px rgba(152, 216, 193, 0.3); }
+        .soft-glow-lavender { box-shadow: 0 10px 30px -5px rgba(200, 193, 240, 0.3); }
+        .soft-glow-peach { box-shadow: 0 10px 30px -5px rgba(232, 197, 165, 0.3); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait of a friendly professional man with a kind smile, soft studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCK6YfX0jrrRJoXYFjlqRf9n1r4IDJPzPD0WqGTwJK0H0oRiTXxdh0ZWY1uWoc8ozxO9O_NtdQwIlAQUque4mW9zV-C6mNbi_FWJkGsv9pNXJWEyzBAV7vWbWdin4wO4MIT9dgD2812a7Sdximis9D3UfHm53KgLFtunSB_eaTScEUUV0EFBCK4BOT9AxS3v40mjl-B2-3ctgbbJQ3098OOPJqrl_JPvzfxCz18S28IqihQOhvN9SFYWKHh5W5YMZKq4bpIzXJ2aTY"/>
+</div>
+<span class="text-xl font-bold text-teal-600 dark:text-teal-400 font-['Plus_Jakarta_Sans'] tracking-tight">Diction</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-teal-50/50 transition-colors">
+<span class="material-symbols-outlined text-slate-800" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile max-w-4xl mx-auto">
+<!-- Greeting Section -->
+<section class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-base">Günaydın, Selim</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Bugün hangi egzersizi yapmak istersin?</p>
+</section>
+<!-- Exercise Vertical Cards (Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mb-stack-lg">
+<!-- Card 1: Nefes Egzersizleri -->
+<div class="bg-primary-container/30 rounded-lg p-6 flex flex-col h-[320px] justify-between soft-glow-mint group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-3xl" data-icon="air">air</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-primary-container">Nefes Egzersizleri</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-primary-container/70 uppercase">İlerleme</span>
+<span class="font-headline-md text-body-md font-bold text-on-primary-container">65%</span>
+</div>
+<div class="h-3 w-full bg-white/50 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<!-- Card 2: Dudak ve Dil -->
+<div class="bg-secondary-container/40 rounded-lg p-6 flex flex-col h-[320px] justify-between soft-glow-lavender group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined !text-3xl" data-icon="lips" style="font-variation-settings: 'FILL' 1;">emoji_objects</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-secondary-container">Dudak ve Dil</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-secondary-container/70 uppercase">İlerleme</span>
+<span class="font-headline-md text-body-md font-bold text-on-secondary-container">40%</span>
+</div>
+<div class="h-3 w-full bg-white/50 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<!-- Card 3: Tekerlemeler -->
+<div class="bg-tertiary-container/40 rounded-lg p-6 flex flex-col h-[320px] justify-between soft-glow-peach group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined !text-3xl" data-icon="forum">forum</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-tertiary-container">Tekerlemeler</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-tertiary-container/70 uppercase">İlerleme</span>
+<span class="font-headline-md text-body-md font-bold text-on-tertiary-container">82%</span>
+</div>
+<div class="h-3 w-full bg-white/50 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 82%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Daily Challenge / Quote Section -->
+<section class="mb-stack-lg">
+<div class="bg-white rounded-lg p-stack-md shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-surface-container">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<h2 class="font-label-sm text-label-sm text-primary uppercase">Günün Tekerlemesi</h2>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface mb-stack-md italic leading-relaxed">
+                    "Şu yoğurdu sarımsaklasak da mı saklasak, sarımsaklamasak da mı saklasak?"
+                </p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold">AS</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300 flex items-center justify-center text-[10px] font-bold">EK</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-teal-100 flex items-center justify-center text-[10px] text-primary font-bold">+12</div>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-sm flex items-center gap-2 soft-glow-mint active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+                        Pratik Yap
+                    </button>
+</div>
+</div>
+</section>
+<!-- Quick Stats Bento-ish -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low rounded-lg p-5 flex flex-col gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase text-[11px]">Toplam Süre</span>
+<span class="font-headline-md text-on-surface">124 Dakika</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-5 flex flex-col gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase text-[11px]">Seri</span>
+<span class="font-headline-md text-on-surface">5 Gün 🔥</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-[0_-10px_40px_rgba(152,216,193,0.12)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 rounded-full px-5 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Exercises</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (Contextual for Home) -->
+<button class="fixed bottom-28 right-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center soft-glow-mint active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined !text-4xl" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</body></html>
+
+<!-- Nefes Egzersizleri -->
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#94d3bd",
+                    "on-tertiary-fixed": "#2a1704",
+                    "tertiary-fixed-dim": "#e3c0a0",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-tint": "#296956",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary-fixed-dim": "#c8c1f0",
+                    "secondary": "#5e5983",
+                    "on-error-container": "#93000a",
+                    "background": "#f8f9fa",
+                    "primary": "#296956",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-variant": "#e1e3e4",
+                    "primary-fixed": "#aff0d8",
+                    "surface-dim": "#d9dadb",
+                    "primary-container": "#98d8c1",
+                    "tertiary": "#74593f",
+                    "surface-container": "#edeeef",
+                    "secondary-container": "#d6cfff",
+                    "on-background": "#191c1d",
+                    "secondary-fixed": "#e5deff",
+                    "surface": "#f8f9fa",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#e8c5a5",
+                    "on-primary-container": "#1e604e",
+                    "on-primary-fixed": "#002118",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#1b163b",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#bfc9c3",
+                    "on-primary-fixed-variant": "#07513f",
+                    "surface-bright": "#f8f9fa",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-fixed-variant": "#474269",
+                    "on-surface-variant": "#404945",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#6b5137",
+                    "on-tertiary-fixed-variant": "#5a422a",
+                    "outline": "#707974",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#94d3bd",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-secondary-container": "#5b5780",
+                    "tertiary-fixed": "#ffdcbe"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-md": "24px",
+                    "stack-lg": "40px",
+                    "margin-mobile": "24px",
+                    "stack-sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-background selection:bg-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container/30 flex items-center justify-center border-2 border-white shadow-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Stylized avatar of a young professional with a friendly expression on a soft pastel background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaHX-QriONnOHqNHJlflur1XnqjhMXCC5gqjhqaGk_U8Qk2nfEo5Bl_EWe9QLNhWPGoBkzdg5J9cq2jZQZkesoPRmPrLclyf97g-pBH6OVDLqI8UI6km2_5i49oZLpPgTyK-5FLc5UbO-VrOqIE9tdTBdOQej5vRxknlpbS6XL_m6brq6bz6cLppI6aU_71pPkShwaiptsB_Q69HlyS5V_7MJRhu6VZJ_SSNsx-Falkn_XTSDbOz49ue55z4pfUs69T0_OiwXu84pe"/>
+</div>
+<span class="text-xl font-bold text-teal-600 dark:text-teal-400 font-['Plus_Jakarta_Sans'] tracking-tight">Diction</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-colors text-slate-400">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-5xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-stack-lg text-center">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Nefes Egzersizleri</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">
+                Daha net bir diksiyon ve sakin bir zihin için temel nefes tekniklerini keşfedin. Sessizliği ve ritmi yakalayın.
+            </p>
+</section>
+<!-- Categories/Quick Filter (Custom Component) -->
+<div class="flex gap-3 mb-stack-md overflow-x-auto pb-2 no-scrollbar">
+<span class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap">Tümü</span>
+<span class="bg-white text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap shadow-sm border border-outline-variant/30 hover:bg-teal-50/50 transition-colors cursor-pointer">Sakinleştirici</span>
+<span class="bg-white text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap shadow-sm border border-outline-variant/30 hover:bg-teal-50/50 transition-colors cursor-pointer">Enerji Verici</span>
+<span class="bg-white text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap shadow-sm border border-outline-variant/30 hover:bg-teal-50/50 transition-colors cursor-pointer">Diksiyon</span>
+</div>
+<!-- Exercise Grid -->
+<div class="bento-grid">
+<!-- Card 1: Diyafram Nefesi -->
+<div class="group bg-white rounded-lg p-6 shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] hover:shadow-[0_25px_40px_-12px_rgba(152,216,193,0.15)] transition-all duration-300 border border-white flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="air">air</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Diyafram Nefesi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Ses tellerini yormadan konuşmanın temeli. Karın bölgesini kullanarak derin nefes almayı öğrenin.</p>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-4 mt-auto">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">5 Dakika</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">Başlangıç</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Card 2: 4-7-8 Tekniği -->
+<div class="group bg-white rounded-lg p-6 shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] hover:shadow-[0_25px_40px_-12px_rgba(152,216,193,0.15)] transition-all duration-300 border border-white flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-secondary-container/20 rounded-full flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="waves">waves</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-secondary transition-colors">4-7-8 Tekniği</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Zihni hızla sakinleştirmek ve odaklanmak için kullanılan ritmik nefes düzenleme çalışması.</p>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-4 mt-auto">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">3 Dakika</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="signal_cellular_alt_2_bar">signal_cellular_alt_2_bar</span>
+<span class="font-label-sm text-label-sm">Orta</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center shadow-lg shadow-secondary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Derin Gevşeme -->
+<div class="group bg-white rounded-lg p-6 shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] hover:shadow-[0_25px_40px_-12px_rgba(152,216,193,0.15)] transition-all duration-300 border border-white flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-tertiary-container/20 rounded-full flex items-center justify-center text-tertiary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="self_improvement">self_improvement</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-tertiary transition-colors">Derin Gevşeme</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Tüm vücut kaslarını gevşeterek nefes kapasitesini en üst seviyeye çıkaran kapsamlı egzersiz.</p>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-4 mt-auto">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">10 Dakika</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[18px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">İleri</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-tertiary text-white flex items-center justify-center shadow-lg shadow-tertiary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Visual Decorative Card (Bento Style) -->
+<div class="relative overflow-hidden rounded-lg min-h-[200px] shadow-[0_20px_30px_-10px_rgba(152,216,193,0.08)] bg-primary-container/10 flex items-center justify-center p-8 text-center border border-white">
+<div class="relative z-10">
+<h4 class="font-headline-md text-on-primary-container mb-2">Günlük Hedefine Ulaş</h4>
+<p class="font-body-md text-on-primary-fixed-variant">Haftalık 15 dakika nefes pratiği diksiyonunu %40 iyileştirir.</p>
+</div>
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="Abstract peaceful image of water ripples and soft morning light, serene and calming aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCulA7fC9TM0-LWH5FJ1aW5yBzUDgfN2C6kaerPupmhj4WMwZPCAAvVuXW6cDQPpImo9pGem8MeYbbw7EUrtfQdpgQ1-VVyM4lOOo4ApC38m2BzscB9EmBA7mSEFZS-cDBUqdfDBBpAaCNutE5fXnavcGen2H1X0HhBaibmy7cUHrOPUyTBV8gWyW1xvmlIib3RZ6Zw0HXwA79fhviGOjbuSex_TNMpMmMVYAMf7v95VUr19BhBmgPI04EcAFKrpWeADRzvuBWpx73-"/>
+</div>
+</div>
+</div>
+<!-- FAB (Floating Action Button) - Rendered only for Home/Dashboard context but here for visual completeness if needed -->
+<button class="fixed bottom-28 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-[0_10px_20px_rgba(41,105,86,0.3)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-[0_-10px_40px_rgba(152,216,193,0.12)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 rounded-full px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Exercises</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="insights">insights</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-teal-500 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>
