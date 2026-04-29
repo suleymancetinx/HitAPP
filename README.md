@@ -6,7 +6,9 @@ Markdown
  | | | |(_)| |_    / \    | _ \ | _ \ 
  | |_| || || __|  / _ \   |  _/ |  _/ 
  |  _  || || |_  / ___ \  | |   | |   
- |_| |_||_| \__|/_/   \_\ |_|   |_|   
+ |_| |_||_| \__|/_/   \_\ |_|   |_|
+</div>
+
 Günlük Diksiyon, Nefes ve Hitabet Egzersizleri Uygulaması 🎙️
 
 HitAPP, kullanıcıların diksiyonlarını geliştirmeleri, doğru nefes alma tekniklerini pratik etmeleri ve dil/dudak tembelliklerini aşmaları için tasarlanmış modern bir PWA (Progressive Web App) projesidir.
