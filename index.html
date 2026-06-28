@@ -9,11 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --primary: #296956;
@@ -28,6 +24,17 @@
             --on-surface: #191c1d;
             --on-surface-variant: #404945;
             --border-light: #bfc9c3;
+        }
+
+        /* Dark mode variables */
+        body.dark {
+            --surface: #0f1110;
+            --surface-variant: #1a1f1d;
+            --on-surface: #e1e3e1;
+            --on-surface-variant: #a0aaa5;
+            --border-light: #2e3632;
+            background-color: #0f1110 !important;
+            color: #e1e3e1 !important;
         }
         
         html, body {
@@ -44,242 +51,164 @@
             display: inline-block;
             vertical-align: middle;
         }
-        
         .material-symbols-outlined.filled {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         
-        .page {
-            display: none;
-            min-height: 100vh;
-            animation: fadeIn 0.3s ease-in;
-        }
+        .page { display: none; min-height: 100vh; animation: fadeIn 0.3s ease-in; }
+        .page.active { display: block; }
         
-        .page.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes breatheIn {
-            0% { transform: scale(1); opacity: 0.4; }
-            100% { transform: scale(1.7); opacity: 0.9; }
-        }
-        
-        @keyframes breatheOut {
-            0% { transform: scale(1.7); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 0.4; }
-        }
-        
-        @keyframes breatheHold {
-            0%, 100% { transform: scale(1.7); opacity: 0.9; }
-            50% { transform: scale(1.7); opacity: 0.85; }
-        }
-        
-        @keyframes pulseRing {
-            0%, 100% { opacity: 0.1; transform: scale(0.95); }
-            50% { opacity: 0.25; transform: scale(1.05); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes breatheIn { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.7); opacity: 0.9; } }
+        @keyframes breatheOut { 0% { transform: scale(1.7); opacity: 0.9; } 100% { transform: scale(1); opacity: 0.4; } }
+        @keyframes breatheHold { 0%, 100% { transform: scale(1.7); opacity: 0.9; } 50% { transform: scale(1.7); opacity: 0.85; } }
+        @keyframes pulseRing { 0%, 100% { opacity: 0.1; transform: scale(0.95); } 50% { opacity: 0.25; transform: scale(1.05); } }
         
         .breath-circle {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
+            width: 140px; height: 140px; border-radius: 50%;
             background: rgba(152, 211, 189, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 50px rgba(152, 211, 189, 0.3);
             transition: all 0.3s ease;
         }
+        @media (min-width: 640px) { .breath-circle { width: 160px; height: 160px; } }
+        @media (min-width: 1024px) { .breath-circle { width: 180px; height: 180px; } }
+        .breath-circle.inhale { animation: breatheIn var(--duration, 4s) ease-in-out forwards; }
+        .breath-circle.exhale { animation: breatheOut var(--duration, 4s) ease-in-out forwards; }
+        .breath-circle.hold { animation: breatheHold var(--duration, 4s) ease-in-out forwards; }
+        .pulse-ring { animation: pulseRing 3s ease-in-out infinite; }
         
-        @media (min-width: 640px) {
-            .breath-circle {
-                width: 160px;
-                height: 160px;
-            }
+        .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(41, 105, 86, 0.15); }
+        
+        .nav-item-active { background-color: rgba(41,105,86,0.1) !important; color: var(--primary) !important; }
+        
+        .lip-text { cursor: pointer; user-select: none; transition: transform 0.15s ease; }
+        .lip-text:active { transform: scale(0.95); }
+        
+        .smooth-scroll { scroll-behavior: smooth; }
+        .safe-area-top { padding-top: max(0.5rem, env(safe-area-inset-top)); }
+        .safe-area-bottom { padding-bottom: max(4rem, calc(0.5rem + env(safe-area-inset-bottom))); }
+
+        /* GLASS HEADER */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 0.5px solid rgba(0,0,0,0.08);
         }
-        
-        @media (min-width: 1024px) {
-            .breath-circle {
-                width: 180px;
-                height: 180px;
-            }
+        body.dark .glass-header {
+            background: rgba(15, 17, 16, 0.75);
+            border-bottom: 0.5px solid rgba(255,255,255,0.06);
         }
-        
-        .breath-circle.inhale {
-            animation: breatheIn var(--duration, 4s) ease-in-out forwards;
+
+        /* GLASS NAV */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 0.5px solid rgba(0,0,0,0.08);
         }
-        
-        .breath-circle.exhale {
-            animation: breatheOut var(--duration, 4s) ease-in-out forwards;
+        body.dark .glass-nav {
+            background: rgba(15, 17, 16, 0.75);
+            border-top: 0.5px solid rgba(255,255,255,0.06);
         }
-        
-        .breath-circle.hold {
-            animation: breatheHold var(--duration, 4s) ease-in-out forwards;
-        }
-        
-        .pulse-ring {
-            animation: pulseRing 3s ease-in-out infinite;
-        }
-        
-        .card-hover {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(41, 105, 86, 0.15);
-        }
-        
-        .nav-item-active {
-            background-color: #f0fdf4 !important;
-            color: var(--primary) !important;
-        }
-        
-        .lip-text {
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.15s ease;
-        }
-        
-        .lip-text:active {
-            transform: scale(0.95);
-        }
-        
-        .smooth-scroll {
-            scroll-behavior: smooth;
-        }
-        
-        .safe-area-top {
-            padding-top: max(1rem, env(safe-area-inset-top));
-        }
-        
-        .safe-area-bottom {
-            padding-bottom: max(5rem, calc(1rem + env(safe-area-inset-bottom)));
-        }
-        
-        /* Responsive Typography */
+
         @media (max-width: 640px) {
             .text-hero { font-size: 1.5rem; }
             .text-subtitle { font-size: 0.875rem; }
             .text-card-title { font-size: 0.95rem; }
         }
-        
         @media (min-width: 641px) and (max-width: 1024px) {
             .text-hero { font-size: 1.75rem; }
             .text-subtitle { font-size: 0.95rem; }
             .text-card-title { font-size: 1.05rem; }
         }
-        
         @media (min-width: 1025px) {
             .text-hero { font-size: 2rem; }
             .text-subtitle { font-size: 1rem; }
             .text-card-title { font-size: 1.1rem; }
         }
         
-        /* Toast notification */
         .toast {
-            position: fixed;
-            top: 80px;
-            left: 50%;
+            position: fixed; top: 72px; left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            background-color: var(--on-surface);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: var(--on-surface); color: white;
+            padding: 8px 20px; border-radius: 999px;
+            font-size: 13px; font-weight: 600;
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s ease; z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+        /* Dark mode card/surface overrides */
+        body.dark .bg-white { background-color: #1a1f1d !important; }
+        body.dark .bg-gray-50 { background-color: #161b18 !important; }
+        body.dark .bg-gray-100 { background-color: #1e2420 !important; }
+        body.dark .border-gray-100 { border-color: #2a3330 !important; }
+        body.dark .border-gray-200 { border-color: #2a3330 !important; }
+        body.dark .border-gray-300 { border-color: #2e3632 !important; }
+        body.dark .text-gray-900 { color: #e1e3e1 !important; }
+        body.dark .text-gray-600 { color: #8a9690 !important; }
+        body.dark .text-gray-500 { color: #6e7a75 !important; }
+        body.dark .text-gray-400 { color: #5a6660 !important; }
+        body.dark .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,0.4) !important; }
+        body.dark .bg-amber-50 { background-color: #1f1a11 !important; }
+        body.dark .border-amber-300 { border-color: #4a3820 !important; }
+
+        /* Dark mode toggle button */
+        .theme-toggle {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background 0.2s;
+            border: none; background: transparent;
         }
-        
-        /* Grid responsive */
-        .grid-auto-fit {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-        }
-        
-        @media (min-width: 768px) {
-            .grid-auto-fit {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 16px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .grid-auto-fit {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
-            }
-        }
-        
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--on-surface-variant);
-        }
+        .theme-toggle:hover { background: rgba(0,0,0,0.06); }
+        body.dark .theme-toggle:hover { background: rgba(255,255,255,0.08); }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--on-surface-variant); }
     </style>
 </head>
 <body class="smooth-scroll bg-white text-gray-900">
     <!-- HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-40 bg-white bg-opacity-95 backdrop-blur-md border-b border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between safe-area-top">
+    <header class="glass-header fixed top-0 left-0 right-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between safe-area-top">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-6 h-6 text-green-700" fill="currentColor" viewBox="0 0 24 24">
+                <div class="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="8" r="4"/>
                         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                     </svg>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold" style="color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif;">hitAPP</h1>
             </div>
-            <button onclick="showToast('Ayarlar yakında!')" class="p-2 hover:bg-gray-100 rounded-full transition">
-                <span class="material-symbols-outlined text-gray-400">settings</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <!-- Dark mode toggle -->
+                <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()" title="Tema değiştir">
+                    <span id="theme-icon" class="material-symbols-outlined text-gray-400" style="font-size:22px;">light_mode</span>
+                </button>
+                <button onclick="showToast('Ayarlar yakında!')" class="theme-toggle">
+                    <span class="material-symbols-outlined text-gray-400" style="font-size:22px;">settings</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="pt-20 sm:pt-24 pb-28 safe-area-bottom">
+    <main class="pt-18 sm:pt-20 pb-24 safe-area-bottom" style="padding-top: 4rem;">
         <!-- ===== HOME PAGE ===== -->
         <section id="page-home" class="page active">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Hero Section -->
-                <div class="mb-6 sm:mb-8">
+                <div class="mb-6 sm:mb-8 pt-4">
                     <h2 class="text-hero font-bold font-Jakarta mb-2">Merhaba 👋</h2>
                     <p class="text-subtitle text-gray-600">Bugün hangi egzersizi yapmak istersin?</p>
                 </div>
 
-                <!-- Exercise Cards Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-6">
-                    <!-- Nefes Egzersizleri -->
                     <div onclick="navigate('nefes')" class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-hover cursor-pointer" style="background: rgba(152, 211, 189, 0.12); border: 1.5px solid rgba(152, 211, 189, 0.35);">
                         <div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mb-4 flex-shrink-0">
                             <span class="material-symbols-outlined text-green-700">air</span>
@@ -291,8 +220,6 @@
                         </div>
                         <span class="text-xs font-bold text-gray-700">65%</span>
                     </div>
-
-                    <!-- Dudak & Dil -->
                     <div onclick="navigate('dudak')" class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-hover cursor-pointer" style="background: rgba(214, 207, 255, 0.15); border: 1.5px solid rgba(214, 207, 255, 0.45);">
                         <div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mb-4 flex-shrink-0">
                             <span class="material-symbols-outlined text-indigo-600">record_voice_over</span>
@@ -304,8 +231,6 @@
                         </div>
                         <span class="text-xs font-bold" style="color: var(--secondary);">40%</span>
                     </div>
-
-                    <!-- Tekerlemeler -->
                     <div onclick="navigate('teker')" class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 card-hover cursor-pointer" style="background: rgba(232, 197, 165, 0.15); border: 1.5px solid rgba(232, 197, 165, 0.45);">
                         <div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mb-4 flex-shrink-0">
                             <span class="material-symbols-outlined text-amber-800">forum</span>
@@ -319,7 +244,6 @@
                     </div>
                 </div>
 
-                <!-- Daily Challenge -->
                 <div class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 mb-6 shadow-sm border border-gray-100">
                     <div class="flex items-center gap-2 mb-3">
                         <span class="material-symbols-outlined text-green-700">auto_awesome</span>
@@ -334,7 +258,6 @@
                     </button>
                 </div>
 
-                <!-- Stats Grid -->
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     <div class="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-5">
                         <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Toplam Süre</p>
@@ -354,18 +277,14 @@
 
         <!-- ===== NEFES EGZERSİZLERİ ===== -->
         <section id="page-nefes" class="page">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
                 <div class="flex items-center gap-3 mb-6">
                     <button onclick="navigate('home')" class="p-2 hover:bg-gray-100 rounded-full transition">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </button>
                     <h2 class="text-hero font-bold font-Jakarta">Nefes Egzersizleri</h2>
                 </div>
-
-                <!-- Exercise List -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
-                    <!-- Diyafram Nefesi -->
                     <div onclick="openBreathingExercise('diyafram')" class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 card-hover cursor-pointer shadow-sm border border-gray-100">
                         <div class="flex gap-4">
                             <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
@@ -386,8 +305,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 4-7-8 Tekniği -->
                     <div onclick="openBreathingExercise('478')" class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 card-hover cursor-pointer shadow-sm border border-gray-100">
                         <div class="flex gap-4">
                             <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
@@ -408,8 +325,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Derin Gevşeme -->
                     <div onclick="openBreathingExercise('gevşeme')" class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 card-hover cursor-pointer shadow-sm border border-gray-100 lg:col-span-2">
                         <div class="flex gap-4">
                             <div class="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
@@ -436,20 +351,15 @@
 
         <!-- ===== ACTIVE BREATHING EXERCISE ===== -->
         <section id="page-breath" class="page">
-            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
                 <div class="flex items-center gap-3 mb-8">
                     <button onclick="stopBreathing()" class="p-2 hover:bg-gray-100 rounded-full transition">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </button>
                     <h2 id="breath-title" class="text-hero font-bold font-Jakarta">Diyafram Nefesi</h2>
                 </div>
-
                 <p class="text-center text-gray-600 text-sm sm:text-base mb-8">Derinleşin, sakinleşin ve sesinizi serbest bırakın.</p>
-
-                <!-- Breathing Visualization -->
                 <div class="flex flex-col items-center gap-8 mb-8">
-                    <!-- Circle -->
                     <div class="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 flex items-center justify-center">
                         <div class="pulse-ring absolute w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 border-2 border-green-200 rounded-full"></div>
                         <div class="absolute w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 border border-green-100 rounded-full"></div>
@@ -460,8 +370,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Phase Indicators -->
                     <div class="flex gap-6 sm:gap-8 justify-center flex-wrap">
                         <div id="phase-inhale" class="flex flex-col items-center gap-2 opacity-35 transition-opacity">
                             <div class="w-3 h-3 rounded-full bg-green-700"></div>
@@ -476,8 +384,6 @@
                             <span class="text-xs font-semibold">Nefes Ver</span>
                         </div>
                     </div>
-
-                    <!-- Progress Bar -->
                     <div class="w-full max-w-sm">
                         <div class="flex justify-between text-xs font-semibold text-gray-600 mb-2">
                             <span id="breath-phase">Başlamak için düğmeye bas</span>
@@ -487,8 +393,6 @@
                             <div id="breath-bar" class="h-full bg-green-700 rounded-full transition-all" style="width: 0%"></div>
                         </div>
                     </div>
-
-                    <!-- Timer Card -->
                     <div class="bg-gray-50 rounded-xl sm:rounded-2xl p-5 sm:p-6 w-full max-w-sm flex items-center justify-between">
                         <div>
                             <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Kalan Süre</p>
@@ -496,12 +400,8 @@
                         </div>
                         <span class="material-symbols-outlined text-4xl text-green-200">timer</span>
                     </div>
-
-                    <!-- Controls -->
                     <div class="flex gap-3 w-full max-w-sm">
-                        <button id="breath-btn" onclick="toggleBreathing()" class="flex-1 bg-green-700 text-white px-6 py-3 rounded-full font-bold font-Jakarta hover:bg-green-800 transition">
-                            Başlat
-                        </button>
+                        <button id="breath-btn" onclick="toggleBreathing()" class="flex-1 bg-green-700 text-white px-6 py-3 rounded-full font-bold font-Jakarta hover:bg-green-800 transition">Başlat</button>
                         <button onclick="resetBreathing()" class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center hover:bg-indigo-200 transition flex-shrink-0">
                             <span class="material-symbols-outlined">refresh</span>
                         </button>
@@ -512,29 +412,22 @@
 
         <!-- ===== DUDAK & DİL EGZERSİZLERİ ===== -->
         <section id="page-dudak" class="page">
-            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
                 <div class="flex items-center gap-3 mb-6">
                     <button onclick="navigate('home')" class="p-2 hover:bg-gray-100 rounded-full transition">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </button>
                     <h2 class="text-hero font-bold font-Jakarta">Dudak & Dil</h2>
                 </div>
-
                 <p class="text-gray-600 text-sm mb-6">Metne her tıklamada sayaç geriye sayar. 5 tekrar sonunda yeni metin!</p>
-
-                <!-- Exercise Card -->
                 <div class="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-6">
                     <p class="text-center text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Alıştırma Metni</p>
                     <div id="lip-text" class="lip-text text-center text-2xl sm:text-3xl font-bold font-Jakarta mb-6 p-4 sm:p-6 bg-amber-50 rounded-lg border-2 border-dashed border-amber-300" onclick="lipClick()">
                         Bir mor vampir
                     </div>
-
-                    <!-- Counter Display -->
                     <div class="text-center mb-6">
                         <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Kalan Tekrar</p>
                         <div id="lip-counter" class="font-bold font-Jakarta text-5xl sm:text-6xl text-green-700 mb-4">5</div>
-                        <!-- Dots -->
                         <div class="flex gap-2 justify-center" id="lip-dots">
                             <div class="w-3 h-3 rounded-full bg-green-700 transition-all"></div>
                             <div class="w-3 h-3 rounded-full bg-green-700 transition-all"></div>
@@ -543,11 +436,8 @@
                             <div class="w-3 h-3 rounded-full bg-green-700 transition-all"></div>
                         </div>
                     </div>
-
                     <p class="text-center text-xs text-gray-600">Metne tıklayarak tekrarlayın</p>
                 </div>
-
-                <!-- Other Exercises -->
                 <div>
                     <h3 class="font-bold font-Jakarta text-sm sm:text-base mb-4">Diğer Alıştırmalar</h3>
                     <div id="lip-exercises-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
@@ -557,39 +447,29 @@
 
         <!-- ===== TEKERLEMELER ===== -->
         <section id="page-teker" class="page">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header -->
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
                 <div class="flex items-center gap-3 mb-5">
                     <button onclick="navigate('home')" class="p-2 hover:bg-gray-100 rounded-full transition">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </button>
                     <h2 class="text-hero font-bold font-Jakarta">Tekerlemeler</h2>
                 </div>
-
                 <p class="text-gray-600 text-sm mb-5">29 harfli Türk tekerlemeleri - harfe göre filtrele ve pratik yap!</p>
-
-                <!-- Search -->
                 <div class="relative mb-5">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">search</span>
-                    <input id="teker-search" type="text" placeholder="Tekerleme ara..." 
+                    <input id="teker-search" type="text" placeholder="Tekerleme ara..."
                         class="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-full border border-gray-300 focus:border-green-700 focus:outline-none text-sm sm:text-base transition"
                         oninput="filterTwisters()">
                 </div>
-
-                <!-- Letter Filter -->
                 <div id="letter-chips" class="flex gap-2 overflow-x-auto pb-3 mb-5 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
                     <button onclick="filterByLetter('ALL')" class="lchip active px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold bg-green-700 text-white border border-green-700 rounded-full whitespace-nowrap flex-shrink-0">Tümü</button>
                 </div>
-
-                <!-- Difficulty Filter -->
                 <div class="flex gap-2 flex-wrap mb-6">
                     <button onclick="filterByDiff('ALL')" class="lchip active px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold bg-green-700 text-white border border-green-700 rounded-full">Tümü</button>
                     <button onclick="filterByDiff('easy')" class="lchip px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold border border-gray-300 rounded-full hover:border-green-300 transition">Kolay</button>
                     <button onclick="filterByDiff('medium')" class="lchip px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold border border-gray-300 rounded-full hover:border-green-300 transition">Orta</button>
                     <button onclick="filterByDiff('hard')" class="lchip px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold border border-gray-300 rounded-full hover:border-green-300 transition">Zor</button>
                 </div>
-
-                <!-- Twisters List -->
                 <div id="twisters-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6"></div>
                 <div id="twisters-empty" class="text-center py-12 hidden">
                     <span class="material-symbols-outlined text-5xl text-gray-300 block mb-3">search_off</span>
@@ -599,35 +479,54 @@
         </section>
     </main>
 
-    <!-- BOTTOM NAVIGATION -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-95 backdrop-blur-md border-t border-gray-200 safe-area-bottom">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-around items-center h-20">
-            <button onclick="navigate('home')" class="nav-btn nav-item-active flex flex-col items-center justify-center gap-1 p-2 sm:p-3 transition rounded-lg">
-                <span class="material-symbols-outlined filled text-lg sm:text-2xl">home</span>
+    <!-- BOTTOM NAVIGATION — glass, compact height -->
+    <nav class="glass-nav fixed bottom-0 left-0 right-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-around items-center" style="height: 56px;">
+            <button onclick="navigate('home')" class="nav-btn nav-item-active flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 transition rounded-xl">
+                <span class="material-symbols-outlined filled" style="font-size:22px;">home</span>
                 <span class="text-xs font-semibold hidden sm:inline">Anasayfa</span>
             </button>
-            <button onclick="navigate('nefes')" class="nav-btn flex flex-col items-center justify-center gap-1 p-2 sm:p-3 text-gray-600 hover:text-green-700 transition rounded-lg">
-                <span class="material-symbols-outlined text-lg sm:text-2xl">air</span>
+            <button onclick="navigate('nefes')" class="nav-btn flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-gray-600 hover:text-green-700 transition rounded-xl">
+                <span class="material-symbols-outlined" style="font-size:22px;">air</span>
                 <span class="text-xs font-semibold hidden sm:inline">Egzersizler</span>
             </button>
-            <button onclick="navigate('teker')" class="nav-btn flex flex-col items-center justify-center gap-1 p-2 sm:p-3 text-gray-600 hover:text-green-700 transition rounded-lg">
-                <span class="material-symbols-outlined text-lg sm:text-2xl">forum</span>
+            <button onclick="navigate('teker')" class="nav-btn flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-gray-600 hover:text-green-700 transition rounded-xl">
+                <span class="material-symbols-outlined" style="font-size:22px;">forum</span>
                 <span class="text-xs font-semibold hidden sm:inline">Tekerlemeler</span>
             </button>
-            <button onclick="navigate('dudak')" class="nav-btn flex flex-col items-center justify-center gap-1 p-2 sm:p-3 text-gray-600 hover:text-green-700 transition rounded-lg">
-                <span class="material-symbols-outlined text-lg sm:text-2xl">record_voice_over</span>
+            <button onclick="navigate('dudak')" class="nav-btn flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 text-gray-600 hover:text-green-700 transition rounded-xl">
+                <span class="material-symbols-outlined" style="font-size:22px;">record_voice_over</span>
                 <span class="text-xs font-semibold hidden sm:inline">Dudak & Dil</span>
             </button>
         </div>
     </nav>
 
-    <!-- TOAST NOTIFICATION -->
     <div id="toast" class="toast"></div>
 
-    <!-- ===== JAVASCRIPT ===== -->
     <script type="text/javascript">
         // ==========================================
-        // DATA: Turkish Alphabet & Tongue Twisters
+        // THEME MANAGEMENT
+        // ==========================================
+        let isDark = localStorage.getItem('hitapp-theme') === 'dark';
+        
+        function applyTheme() {
+            if (isDark) {
+                document.body.classList.add('dark');
+                document.getElementById('theme-icon').textContent = 'dark_mode';
+            } else {
+                document.body.classList.remove('dark');
+                document.getElementById('theme-icon').textContent = 'light_mode';
+            }
+        }
+
+        function toggleTheme() {
+            isDark = !isDark;
+            localStorage.setItem('hitapp-theme', isDark ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        // ==========================================
+        // DATA
         // ==========================================
         const TURKISH_ALPHABET = ['A','B','C','Ç','D','E','F','G','Ğ','H','I','İ','J','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z'];
 
@@ -843,13 +742,11 @@
         ];
 
         // ==========================================
-        // STATE MANAGEMENT
+        // STATE
         // ==========================================
         let currentPage = 'home';
         let selectedLetter = 'ALL';
         let selectedDifficulty = 'ALL';
-
-        // Breathing Exercise State
         let breathingRunning = false;
         let breathingElapsed = 0;
         let breathingTotal = 300;
@@ -859,62 +756,32 @@
         let breathingCountdownInterval = null;
         let breathingDurations = { inhale: 4, hold: 4, exhale: 4 };
         const breathingPhases = ['inhale', 'hold', 'exhale'];
-
-        // Lip Exercise State
         let lipCounter = 5;
         let lipExerciseIndex = 0;
 
         // ==========================================
-        // NAVIGATION & PAGE MANAGEMENT
+        // NAVIGATION
         // ==========================================
         function navigate(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-item-active'));
-
-            const pageMap = {
-                'home': 'page-home',
-                'nefes': 'page-nefes',
-                'dudak': 'page-dudak',
-                'teker': 'page-teker'
-            };
-
-            if (pageMap[page]) {
-                document.getElementById(pageMap[page]).classList.add('active');
-            }
-
-            const navButtons = document.querySelectorAll('.nav-btn');
-            const navMap = {
-                'home': 0,
-                'nefes': 1,
-                'teker': 2,
-                'dudak': 3
-            };
-
-            if (typeof navMap[page] !== 'undefined') {
-                navButtons[navMap[page]].classList.add('nav-item-active');
-            }
-
+            const pageMap = { 'home': 'page-home', 'nefes': 'page-nefes', 'dudak': 'page-dudak', 'teker': 'page-teker' };
+            if (pageMap[page]) document.getElementById(pageMap[page]).classList.add('active');
+            const navMap = { 'home': 0, 'nefes': 1, 'teker': 2, 'dudak': 3 };
+            if (typeof navMap[page] !== 'undefined') document.querySelectorAll('.nav-btn')[navMap[page]].classList.add('nav-item-active');
             currentPage = page;
             window.scrollTo(0, 0);
-
-            if (page === 'teker') {
-                initializeLetterChips();
-                renderTwisters();
-            }
-            if (page === 'dudak') {
-                renderLipExercises();
-            }
+            if (page === 'teker') { initializeLetterChips(); renderTwisters(); }
+            if (page === 'dudak') renderLipExercises();
         }
 
         function openBreathingExercise(type) {
             stopBreathing(true);
-            
             const configurations = {
                 'diyafram': { title: 'Diyafram Nefesi', total: 300, durations: { inhale: 4, hold: 4, exhale: 4 } },
                 '478': { title: '4-7-8 Tekniği', total: 180, durations: { inhale: 4, hold: 7, exhale: 8 } },
                 'gevşeme': { title: 'Derin Gevşeme', total: 600, durations: { inhale: 5, hold: 3, exhale: 6 } }
             };
-
             const config = configurations[type];
             document.getElementById('breath-title').textContent = config.title;
             breathingTotal = config.total;
@@ -922,7 +789,6 @@
             breathingDurations = config.durations;
             breathingRunning = false;
             breathingPhaseIndex = 0;
-
             document.getElementById('breath-btn').textContent = 'Başlat';
             document.getElementById('breath-label').textContent = 'Hazır';
             document.getElementById('breath-count').textContent = '';
@@ -932,102 +798,75 @@
             document.getElementById('breath-circle').className = 'breath-circle';
             updateBreathingRemaining();
             resetPhaseIndicators();
-
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-breath').classList.add('active');
-
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-item-active'));
             document.querySelectorAll('.nav-btn')[1].classList.add('nav-item-active');
         }
 
         // ==========================================
-        // BREATHING EXERCISE ENGINE
+        // BREATHING ENGINE
         // ==========================================
-        function toggleBreathing() {
-            breathingRunning ? pauseBreathing() : startBreathing();
-        }
+        function toggleBreathing() { breathingRunning ? pauseBreathing() : startBreathing(); }
 
         function startBreathing() {
             breathingRunning = true;
             document.getElementById('breath-btn').textContent = 'Durdur';
-            showToast('Egzersiz başlatıldı ✓');
-
+            showToast('Egzersiz başlatıldı \u2713');
             breathingInterval = setInterval(() => {
                 breathingElapsed++;
                 updateBreathingRemaining();
-                if (breathingElapsed >= breathingTotal) {
-                    stopBreathing(false);
-                    showToast('Egzersiz tamamlandı! 🎉');
-                }
+                if (breathingElapsed >= breathingTotal) { stopBreathing(false); showToast('Egzersiz tamamland\u0131! \uD83C\uDF89'); }
             }, 1000);
-
             breathingPhaseIndex = 0;
             runBreathingPhase();
         }
 
         function pauseBreathing() {
             breathingRunning = false;
-            clearInterval(breathingInterval);
-            clearTimeout(breathingPhaseTimeout);
-            clearInterval(breathingCountdownInterval);
+            clearInterval(breathingInterval); clearTimeout(breathingPhaseTimeout); clearInterval(breathingCountdownInterval);
             document.getElementById('breath-btn').textContent = 'Devam Et';
-            document.getElementById('breath-label').textContent = 'Duraklatıldı';
+            document.getElementById('breath-label').textContent = 'Duraklat\u0131ld\u0131';
             document.getElementById('breath-count').textContent = '';
         }
 
         function stopBreathing(silent) {
             breathingRunning = false;
-            clearInterval(breathingInterval);
-            clearTimeout(breathingPhaseTimeout);
-            clearInterval(breathingCountdownInterval);
+            clearInterval(breathingInterval); clearTimeout(breathingPhaseTimeout); clearInterval(breathingCountdownInterval);
             breathingElapsed = 0;
-            if (!silent) {
-                navigate('nefes');
-            }
+            if (!silent) navigate('nefes');
         }
 
         function resetBreathing() {
             stopBreathing(true);
-            breathingElapsed = 0;
-            breathingPhaseIndex = 0;
-            document.getElementById('breath-btn').textContent = 'Başlat';
-            document.getElementById('breath-label').textContent = 'Hazır';
+            breathingElapsed = 0; breathingPhaseIndex = 0;
+            document.getElementById('breath-btn').textContent = 'Ba\u015flat';
+            document.getElementById('breath-label').textContent = 'Haz\u0131r';
             document.getElementById('breath-count').textContent = '';
             document.getElementById('breath-bar').style.width = '0%';
-            document.getElementById('breath-phase').textContent = 'Başlamak için düğmeye bas';
+            document.getElementById('breath-phase').textContent = 'Ba\u015flamak i\u00e7in d\u00fc\u011fmeye bas';
             document.getElementById('breath-countdown').textContent = '';
             document.getElementById('breath-circle').className = 'breath-circle';
-            updateBreathingRemaining();
-            resetPhaseIndicators();
+            updateBreathingRemaining(); resetPhaseIndicators();
         }
 
         function runBreathingPhase() {
             if (!breathingRunning) return;
-
             const phase = breathingPhases[breathingPhaseIndex % 3];
             const duration = breathingDurations[phase];
             const phaseLabels = { inhale: 'Nefes Al', hold: 'Tut', exhale: 'Nefes Ver' };
-
             document.getElementById('breath-label').textContent = phaseLabels[phase];
             document.getElementById('breath-count').textContent = duration + ' saniye';
             document.getElementById('breath-phase').textContent = phaseLabels[phase] + '...';
-
             setPhaseIndicator(phase);
-
             const circle = document.getElementById('breath-circle');
             circle.className = 'breath-circle';
             circle.style.setProperty('--duration', duration + 's');
             void circle.offsetWidth;
             circle.classList.add(phase);
-
             const bar = document.getElementById('breath-bar');
-            bar.style.transition = 'none';
-            bar.style.width = '0%';
-            setTimeout(() => {
-                bar.style.transition = `width ${duration}s linear`;
-                bar.style.width = '100%';
-            }, 50);
-
+            bar.style.transition = 'none'; bar.style.width = '0%';
+            setTimeout(() => { bar.style.transition = `width ${duration}s linear`; bar.style.width = '100%'; }, 50);
             clearInterval(breathingCountdownInterval);
             let countdown = duration;
             document.getElementById('breath-countdown').textContent = countdown + 's';
@@ -1037,11 +876,7 @@
                 document.getElementById('breath-count').textContent = countdown + ' saniye';
                 if (countdown <= 0) clearInterval(breathingCountdownInterval);
             }, 1000);
-
-            breathingPhaseTimeout = setTimeout(() => {
-                breathingPhaseIndex++;
-                runBreathingPhase();
-            }, duration * 1000);
+            breathingPhaseTimeout = setTimeout(() => { breathingPhaseIndex++; runBreathingPhase(); }, duration * 1000);
         }
 
         function updateBreathingRemaining() {
@@ -1053,46 +888,37 @@
 
         function setPhaseIndicator(phase) {
             document.querySelectorAll('[id^="phase-"]').forEach(el => {
-                el.classList.remove('opacity-100');
-                el.classList.add('opacity-35');
+                el.classList.remove('opacity-100'); el.classList.add('opacity-35');
                 el.querySelector('.bg-green-700')?.classList.replace('bg-green-700', 'bg-gray-400');
             });
-
             const element = document.getElementById('phase-' + phase);
-            element.classList.remove('opacity-35');
-            element.classList.add('opacity-100');
+            element.classList.remove('opacity-35'); element.classList.add('opacity-100');
             element.querySelector('.bg-gray-400')?.classList.replace('bg-gray-400', 'bg-green-700');
         }
 
         function resetPhaseIndicators() {
-            document.querySelectorAll('[id^="phase-"]').forEach(el => {
-                el.classList.add('opacity-35');
-                el.classList.remove('opacity-100');
-            });
+            document.querySelectorAll('[id^="phase-"]').forEach(el => { el.classList.add('opacity-35'); el.classList.remove('opacity-100'); });
         }
 
         // ==========================================
-        // LIP EXERCISE MANAGEMENT
+        // LIP EXERCISES
         // ==========================================
         function lipClick() {
             if (lipCounter <= 0) return;
             lipCounter--;
             document.getElementById('lip-counter').textContent = lipCounter;
             updateLipDots();
-
             const textEl = document.getElementById('lip-text');
             textEl.style.transform = 'scale(0.95)';
             setTimeout(() => textEl.style.transform = 'scale(1)', 150);
-
             if (lipCounter === 0) {
                 setTimeout(() => {
                     lipExerciseIndex = (lipExerciseIndex + 1) % LIP_EXERCISES.length;
                     document.getElementById('lip-text').textContent = LIP_EXERCISES[lipExerciseIndex];
                     lipCounter = 5;
                     document.getElementById('lip-counter').textContent = 5;
-                    updateLipDots();
-                    renderLipExercises();
-                    showToast('Yeni alıştırma! 👄');
+                    updateLipDots(); renderLipExercises();
+                    showToast('Yeni al\u0131\u015ft\u0131rma! \uD83D\uDC44');
                 }, 400);
             }
         }
@@ -1100,13 +926,8 @@
         function updateLipDots() {
             const dots = document.getElementById('lip-dots').children;
             for (let i = 0; i < 5; i++) {
-                if (i < lipCounter) {
-                    dots[i].classList.add('bg-green-700');
-                    dots[i].classList.remove('bg-gray-400');
-                } else {
-                    dots[i].classList.add('bg-gray-400');
-                    dots[i].classList.remove('bg-green-700');
-                }
+                if (i < lipCounter) { dots[i].classList.add('bg-green-700'); dots[i].classList.remove('bg-gray-400'); }
+                else { dots[i].classList.add('bg-gray-400'); dots[i].classList.remove('bg-green-700'); }
             }
         }
 
@@ -1121,26 +942,22 @@
         }
 
         function setLipExercise(index) {
-            lipExerciseIndex = index;
-            lipCounter = 5;
+            lipExerciseIndex = index; lipCounter = 5;
             document.getElementById('lip-text').textContent = LIP_EXERCISES[index];
             document.getElementById('lip-counter').textContent = 5;
-            updateLipDots();
-            renderLipExercises();
+            updateLipDots(); renderLipExercises();
         }
 
         // ==========================================
-        // TONGUE TWISTERS MANAGEMENT
+        // TONGUE TWISTERS
         // ==========================================
         function initializeLetterChips() {
             const container = document.getElementById('letter-chips');
-            const existing = container.querySelectorAll('button:not(:first-child)');
-            if (existing.length === 0) {
+            if (container.querySelectorAll('button:not(:first-child)').length === 0) {
                 TURKISH_ALPHABET.forEach(letter => {
                     const btn = document.createElement('button');
                     btn.className = 'lchip px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold border border-gray-300 rounded-full hover:border-green-300 transition whitespace-nowrap flex-shrink-0';
-                    btn.textContent = letter;
-                    btn.id = 'chip-' + letter;
+                    btn.textContent = letter; btn.id = 'chip-' + letter;
                     btn.onclick = () => filterByLetter(letter);
                     container.appendChild(btn);
                 });
@@ -1150,13 +967,8 @@
         function filterByLetter(letter) {
             selectedLetter = letter;
             document.querySelectorAll('[id^="chip-"]').forEach(btn => {
-                if (letter === btn.textContent.trim()) {
-                    btn.classList.add('bg-green-700', 'text-white', 'border-green-700');
-                    btn.classList.remove('border-gray-300', 'text-gray-700');
-                } else {
-                    btn.classList.remove('bg-green-700', 'text-white', 'border-green-700');
-                    btn.classList.add('border-gray-300');
-                }
+                if (letter === btn.textContent.trim()) { btn.classList.add('bg-green-700', 'text-white', 'border-green-700'); btn.classList.remove('border-gray-300', 'text-gray-700'); }
+                else { btn.classList.remove('bg-green-700', 'text-white', 'border-green-700'); btn.classList.add('border-gray-300'); }
             });
             renderTwisters();
         }
@@ -1166,13 +978,8 @@
             const diffMap = { 'ALL': 0, 'easy': 1, 'medium': 2, 'hard': 3 };
             const buttons = Array.from(document.querySelectorAll('.lchip')).slice(0, 4);
             buttons.forEach((btn, idx) => {
-                if (idx === diffMap[difficulty]) {
-                    btn.classList.add('bg-green-700', 'text-white', 'border-green-700');
-                    btn.classList.remove('border-gray-300', 'text-gray-700');
-                } else {
-                    btn.classList.remove('bg-green-700', 'text-white', 'border-green-700');
-                    btn.classList.add('border-gray-300');
-                }
+                if (idx === diffMap[difficulty]) { btn.classList.add('bg-green-700', 'text-white', 'border-green-700'); btn.classList.remove('border-gray-300', 'text-gray-700'); }
+                else { btn.classList.remove('bg-green-700', 'text-white', 'border-green-700'); btn.classList.add('border-gray-300'); }
             });
             renderTwisters();
         }
@@ -1182,10 +989,8 @@
             const list = document.getElementById('twisters-list');
             const emptyState = document.getElementById('twisters-empty');
             list.innerHTML = '';
-
             const letters = selectedLetter === 'ALL' ? TURKISH_ALPHABET : [selectedLetter];
             let items = [];
-
             letters.forEach(letter => {
                 if (TWISTERS_DATABASE[letter]) {
                     TWISTERS_DATABASE[letter].forEach(twister => {
@@ -1196,68 +1001,45 @@
                     });
                 }
             });
-
-            if (items.length === 0) {
-                list.style.display = 'none';
-                emptyState.style.display = 'block';
-                return;
-            }
-
-            list.style.display = 'grid';
-            emptyState.style.display = 'none';
-
+            if (items.length === 0) { list.style.display = 'none'; emptyState.style.display = 'block'; return; }
+            list.style.display = 'grid'; emptyState.style.display = 'none';
             const difficultyLabels = { easy: 'Kolay', medium: 'Orta', hard: 'Zor' };
-            const difficultyColors = {
-                easy: 'bg-green-100 text-green-700',
-                medium: 'bg-indigo-100 text-indigo-700',
-                hard: 'bg-amber-100 text-amber-700'
-            };
-
+            const difficultyColors = { easy: 'bg-green-100 text-green-700', medium: 'bg-indigo-100 text-indigo-700', hard: 'bg-amber-100 text-amber-700' };
             items.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100';
                 card.innerHTML = `
                     <div class="flex items-start justify-between gap-4 mb-3">
                         <div class="flex gap-2 flex-wrap">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
-                                ${item.letter}
-                            </span>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold ${difficultyColors[item.difficulty]}">
-                                ${difficultyLabels[item.difficulty]}
-                            </span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">${item.letter}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${difficultyColors[item.difficulty]}">${difficultyLabels[item.difficulty]}</span>
                         </div>
-                        <button onclick="showToast('Mikrofon kaydı yakında! 🎙')" class="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-center flex-shrink-0 hover:bg-green-800 transition">
+                        <button onclick="showToast('Mikrofon kayd\u0131 yak\u0131nda! \uD83C\uDF99')" class="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-center flex-shrink-0 hover:bg-green-800 transition">
                             <span class="material-symbols-outlined filled text-base">mic</span>
                         </button>
                     </div>
-                    <p class="font-Jakarta font-semibold text-sm sm:text-base text-gray-900 leading-relaxed">
-                        "${item.text}"
-                    </p>
+                    <p class="font-Jakarta font-semibold text-sm sm:text-base text-gray-900 leading-relaxed">"${item.text}"</p>
                 `;
                 list.appendChild(card);
             });
         }
 
-        function filterTwisters() {
-            renderTwisters();
-        }
+        function filterTwisters() { renderTwisters(); }
 
         // ==========================================
-        // UTILITY FUNCTIONS
+        // UTILITIES
         // ==========================================
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            toast.textContent = message; toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
         // ==========================================
-        // INITIALIZATION
+        // INIT
         // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
+            applyTheme();
             navigate('home');
         });
     </script>
